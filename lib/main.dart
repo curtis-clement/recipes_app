@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipes_app/categories_page.dart';
+
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -7,7 +9,11 @@ final theme = ThemeData(
     brightness: Brightness.dark,
     seedColor: const Color.fromARGB(255, 131, 57, 0),
   ),
-  textTheme: GoogleFonts.latoTextTheme(),
+  textTheme: GoogleFonts.latoTextTheme(
+    const TextTheme(
+      titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    ),
+  ),
 );
 
 void main() {
@@ -21,7 +27,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: const Text('Hello World'),
+      home: const CategoriesPage(),
     );
   }
 }
