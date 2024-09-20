@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/data/dummy_data.dart';
+import 'package:recipes_app/widgets/category_grid_item.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -10,19 +12,16 @@ class CategoriesPage extends StatelessWidget {
           title: const Text('Categories'),
         ),
         body: GridView(
+          padding: const EdgeInsets.all(20),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1.5,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
           ),
-          children: const [
-            Text('Category 1'),
-            Text('Category 2'),
-            Text('Category 3'),
-            Text('Category 4'),
-            Text('Category 5'),
-            Text('Category 6'),
+          children: [
+            for (final category in availableCategories)
+              CategoryGridItem(category: category),
           ],
         ));
   }
