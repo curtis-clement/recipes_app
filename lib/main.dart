@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipes_app/categories_page.dart';
+import 'package:recipes_app/pages/categories_page.dart';
 
 
 final theme = ThemeData(
