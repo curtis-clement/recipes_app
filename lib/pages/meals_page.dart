@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/models/meal.dart';
 import 'package:recipes_app/widgets/meal_item.dart';
-import 'package:recipes_app/pages/meal_details_pages.dart';
+import 'package:recipes_app/pages/meal_details_page.dart';
 
 class MealsPage extends StatelessWidget {
   const MealsPage({super.key, required this.title, required this.meals});
