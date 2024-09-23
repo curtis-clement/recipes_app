@@ -21,17 +21,20 @@ class _TabsPageState extends State<TabsPage> {
   @override
   Widget build(BuildContext context) {
     Widget activePage = const CategoriesPage();
+    var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
-      activePage = const MealsPage(title: 'Favorites', meals: []);
+      activePage = const MealsPage(meals: []);
+      activePageTitle = 'Favorites';
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('dynamic...'),
+        title: Text(activePageTitle),
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.set_meal), label: 'Categories'),

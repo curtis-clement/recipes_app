@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:recipes_app/pages/categories_page.dart';
+import 'package:recipes_app/pages/tabs.dart';
 
 
 final theme = ThemeData(
@@ -27,7 +27,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: const CategoriesPage(),
+      home: const TabsPage(),
     );
   }
 }

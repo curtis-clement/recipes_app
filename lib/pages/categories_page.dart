@@ -8,35 +8,35 @@ class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
 
   void _selectCateogry(BuildContext context, Category category) {
-    final meals = dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+    final meals = dummyMeals
+        .where((meal) => meal.categories.contains(category.id))
+        .toList();
 
-    final route = MaterialPageRoute(builder: (ctx) => MealsPage(title: category.title, meals: meals));
-    Navigator.push(context, route); // Same as Navigator.of(context).push(route);
+    final route = MaterialPageRoute(
+        builder: (ctx) => MealsPage(title: category.title, meals: meals));
+    Navigator.push(
+        context, route); // Same as Navigator.of(context).push(route);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Categories'),
-        ),
-        body: GridView(
-          padding: const EdgeInsets.all(20),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.5,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
+    return GridView(
+      padding: const EdgeInsets.all(20),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.5,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+      ),
+      children: [
+        for (final category in availableCategories)
+          CategoryGridItem(
+            category: category,
+            onSelectCategory: () {
+              _selectCateogry(context, category);
+            },
           ),
-          children: [
-            for (final category in availableCategories)
-              CategoryGridItem(
-                category: category,
-                onSelectCategory: () {
-                  _selectCateogry(context, category);
-                },
-              ),
-          ],
-        ));
+      ],
+    );
   }
 }

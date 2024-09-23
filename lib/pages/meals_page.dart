@@ -4,9 +4,9 @@ import 'package:recipes_app/widgets/meal_item.dart';
 import 'package:recipes_app/pages/meal_details_page.dart';
 
 class MealsPage extends StatelessWidget {
-  const MealsPage({super.key, required this.title, required this.meals});
+  const MealsPage({super.key, this.title, required this.meals});
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
 
   void selectMeal(BuildContext context, Meal meal) {
@@ -43,9 +43,13 @@ class MealsPage extends StatelessWidget {
       );
     }
 
+    if (title == null) {
+      return content;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );
