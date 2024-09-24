@@ -3,9 +3,11 @@ import 'package:recipes_app/data/dummy_data.dart';
 import 'package:recipes_app/widgets/category_grid_item.dart';
 import 'package:recipes_app/pages/meals_page.dart';
 import 'package:recipes_app/models/category.dart';
-
+import 'package:recipes_app/models/meal.dart';
 class CategoriesPage extends StatelessWidget {
-  const CategoriesPage({super.key});
+  const CategoriesPage({super.key, required this.onToggleFavorite});
+
+  final void Function(Meal) onToggleFavorite;
 
   void _selectCateogry(BuildContext context, Category category) {
     final meals = dummyMeals
@@ -13,7 +15,7 @@ class CategoriesPage extends StatelessWidget {
         .toList();
 
     final route = MaterialPageRoute(
-        builder: (ctx) => MealsPage(title: category.title, meals: meals));
+        builder: (ctx) => MealsPage(title: category.title, meals: meals, onToggleFavorite: onToggleFavorite));
     Navigator.push(
         context, route); // Same as Navigator.of(context).push(route);
   }

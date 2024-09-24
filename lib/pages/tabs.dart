@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipes_app/pages/categories_page.dart';
 import 'package:recipes_app/pages/meals_page.dart';
+import 'package:recipes_app/models/meal.dart';
 
 class TabsPage extends StatefulWidget {
   const TabsPage({super.key});
@@ -11,6 +12,17 @@ class TabsPage extends StatefulWidget {
 
 class _TabsPageState extends State<TabsPage> {
   int _selectedPageIndex = 0;
+  final List<Meal> _favoriteMeals = [];
+
+  void _toggleMealFavoriteStatus(Meal meal) {
+    final isFavorite = _favoriteMeals.any((meal) => meal.id == meal.id);
+
+    if (isFavorite) {
+      _favoriteMeals.remove(meal);
+    } else {
+      _favoriteMeals.add(meal);
+    }
+  }
 
   void _selectPage(int index) {
     setState(() {
@@ -20,11 +32,11 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget activePage = const CategoriesPage();
+    Widget activePage = CategoriesPage(onToggleFavorite: _toggleMealFavoriteStatus);
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
-      activePage = const MealsPage(meals: []);
+      activePage = MealsPage(meals: [], onToggleFavorite: _toggleMealFavoriteStatus);
       activePageTitle = 'Favorites';
     }
 
