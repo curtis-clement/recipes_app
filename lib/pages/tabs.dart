@@ -18,9 +18,13 @@ class _TabsPageState extends State<TabsPage> {
     final isFavorite = _favoriteMeals.any((meal) => meal.id == meal.id);
 
     if (isFavorite) {
-      _favoriteMeals.remove(meal);
+      setState(() {
+        _favoriteMeals.remove(meal);
+      });
     } else {
-      _favoriteMeals.add(meal);
+      setState(() {
+        _favoriteMeals.add(meal);
+      });
     }
   }
 
@@ -36,7 +40,7 @@ class _TabsPageState extends State<TabsPage> {
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
-      activePage = MealsPage(meals: [], onToggleFavorite: _toggleMealFavoriteStatus);
+      activePage = MealsPage(meals: _favoriteMeals, onToggleFavorite: _toggleMealFavoriteStatus);
       activePageTitle = 'Favorites';
     }
 
