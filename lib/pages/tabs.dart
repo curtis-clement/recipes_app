@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipes_app/pages/categories_page.dart';
 import 'package:recipes_app/pages/meals_page.dart';
 import 'package:recipes_app/models/meal.dart';
+import 'package:recipes_app/widgets/main_drawer.dart';
 
 class TabsPage extends StatefulWidget {
   const TabsPage({super.key});
@@ -55,6 +56,7 @@ class _TabsPageState extends State<TabsPage> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
+      drawer: MainDrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIndex,
