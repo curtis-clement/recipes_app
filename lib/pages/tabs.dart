@@ -14,6 +14,11 @@ class _TabsPageState extends State<TabsPage> {
   int _selectedPageIndex = 0;
   final List<Meal> _favoriteMeals = [];
 
+  void _showInfoMessage(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
   void _toggleMealFavoriteStatus(Meal meal) {
     final isFavorite = _favoriteMeals.any((meal) => meal.id == meal.id);
 
@@ -21,10 +26,12 @@ class _TabsPageState extends State<TabsPage> {
       setState(() {
         _favoriteMeals.remove(meal);
       });
+      _showInfoMessage('Meal removed from favorites');
     } else {
       setState(() {
         _favoriteMeals.add(meal);
       });
+      _showInfoMessage('Meal added to favorites');
     }
   }
 
