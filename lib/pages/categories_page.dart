@@ -5,12 +5,13 @@ import 'package:recipes_app/pages/meals_page.dart';
 import 'package:recipes_app/models/category.dart';
 import 'package:recipes_app/models/meal.dart';
 class CategoriesPage extends StatelessWidget {
-  const CategoriesPage({super.key, required this.onToggleFavorite});
+  const CategoriesPage({super.key, required this.onToggleFavorite, required this.availableMeals});
 
   final void Function(Meal) onToggleFavorite;
-
+  final List<Meal> availableMeals;
+  
   void _selectCateogry(BuildContext context, Category category) {
-    final meals = dummyMeals
+    final meals = availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
