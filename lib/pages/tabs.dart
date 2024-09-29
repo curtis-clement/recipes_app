@@ -27,7 +27,8 @@ class _TabsPageState extends State<TabsPage> {
 
   void _showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   void _toggleMealFavoriteStatus(Meal meal) {
@@ -53,10 +54,14 @@ class _TabsPageState extends State<TabsPage> {
   }
 
   void _setScreen(String identifier) async {
-    Navigator.of(context).pop(); 
+    Navigator.of(context).pop();
     if (identifier == 'filters') {
-      final result = await Navigator.of(context).push<Map<Filter, bool>>(MaterialPageRoute(builder: (ctx) => const FilterPage()));
-      
+      final result = await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(
+          builder: (ctx) => FilterPage(currentFilters: _selectedFilters),
+        ),
+      );
+
       setState(() {
         _selectedFilters = result ?? kInitialFilters;
       });
@@ -80,12 +85,15 @@ class _TabsPageState extends State<TabsPage> {
       }
       return true;
     }).toList();
-    
-    Widget activePage = CategoriesPage(onToggleFavorite: _toggleMealFavoriteStatus, availableMeals: availableMeals);
+
+    Widget activePage = CategoriesPage(
+        onToggleFavorite: _toggleMealFavoriteStatus,
+        availableMeals: availableMeals);
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
-      activePage = MealsPage(meals: _favoriteMeals, onToggleFavorite: _toggleMealFavoriteStatus);
+      activePage = MealsPage(
+          meals: _favoriteMeals, onToggleFavorite: _toggleMealFavoriteStatus);
       activePageTitle = 'Favorites';
     }
 
@@ -99,9 +107,9 @@ class _TabsPageState extends State<TabsPage> {
         currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.set_meal), label: 'Categories'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.set_meal), label: 'Categories'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorites'),
-
         ],
       ),
     );
