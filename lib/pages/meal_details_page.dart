@@ -8,12 +8,6 @@ class MealDetailsPage extends ConsumerWidget {
 
   final Meal meal;
 
-  // void _showInfoMessage(String message) {
-  //   ScaffoldMessenger.of(context).clearSnackBars();
-  //   ScaffoldMessenger.of(context)
-  //       .showSnackBar(SnackBar(content: Text(message)));
-  // }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
