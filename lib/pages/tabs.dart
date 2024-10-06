@@ -4,7 +4,6 @@ import 'package:recipes_app/pages/categories_page.dart';
 import 'package:recipes_app/pages/filters_page.dart';
 import 'package:recipes_app/pages/meals_page.dart';
 import 'package:recipes_app/widgets/main_drawer.dart';
-import 'package:recipes_app/providers/meals_provider.dart';
 import 'package:recipes_app/providers/favorites_provider.dart';
 import 'package:recipes_app/providers/filters_provider.dart';
 
@@ -44,23 +43,7 @@ class _TabsPageState extends ConsumerState<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
-    final activeFilters = ref.watch(filtersProvider); 
-    final availableMeals = meals.where((meal) {
-      if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      if (activeFilters[Filter.vegan]! && !meal.isVegan) {
-        return false;
-      }
-      return true;
-    }).toList();
+    final availableMeals = ref.watch(filteredMealsProvider);
 
     Widget activePage = CategoriesPage(
         availableMeals: availableMeals);
