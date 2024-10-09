@@ -4,13 +4,40 @@ import 'package:recipes_app/widgets/category_grid_item.dart';
 import 'package:recipes_app/pages/meals_page.dart';
 import 'package:recipes_app/models/category.dart';
 import 'package:recipes_app/models/meal.dart';
-class CategoriesPage extends StatelessWidget {
+
+class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key, required this.availableMeals});
 
   final List<Meal> availableMeals;
-  
+
+  @override
+  State<CategoriesPage> createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+      lowerBound: 0,
+      upperBound: 1,
+    );
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   void _selectCateogry(BuildContext context, Category category) {
-    final meals = availableMeals
+    final meals = widget.availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
@@ -22,9 +49,11 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-      padding: const EdgeInsets.all(20),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    return AnimatedBuilder(
+      animation: _animationController,
+      child: GridView(
+        padding: const EdgeInsets.all(20),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1.5,
         crossAxisSpacing: 20,
@@ -38,7 +67,14 @@ class CategoriesPage extends StatelessWidget {
               _selectCateogry(context, category);
             },
           ),
-      ],
+        ],
+      ),
+      builder: (context, child) => Padding(
+        padding: EdgeInsets.only(
+          top: 100 - _animationController.value * 100,
+        ),
+        child: child,
+      ),
     );
   }
 }
