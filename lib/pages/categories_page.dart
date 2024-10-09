@@ -69,10 +69,8 @@ class _CategoriesPageState extends State<CategoriesPage> with SingleTickerProvid
           ),
         ],
       ),
-      builder: (context, child) => Padding(
-        padding: EdgeInsets.only(
-          top: 100 - _animationController.value * 100,
-        ),
+      builder: (context, child) => SlideTransition(
+        position: _animationController.drive(Tween(begin: const Offset(0, -1), end: const Offset(0, 0))),
         child: child,
       ),
     );
