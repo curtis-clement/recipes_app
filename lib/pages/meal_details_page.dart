@@ -24,7 +24,13 @@ class MealDetailsPage extends ConsumerWidget {
               ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text(isFavorite ? 'Meal added to favorites' : 'Meal removed from favorites')));
             },
-            icon: Icon(isFavorite ? Icons.star : Icons.star_border),
+            icon: AnimatedSwitcher(
+              child: Icon(isFavorite ? Icons.star : Icons.star_border),
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return RotationTransition(turns: animation, child: child);
+              },
+            ),
           )
         ],
       ),
