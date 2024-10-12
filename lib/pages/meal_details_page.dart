@@ -25,7 +25,7 @@ class MealDetailsPage extends ConsumerWidget {
                   .showSnackBar(SnackBar(content: Text(isFavorite ? 'Meal added to favorites' : 'Meal removed from favorites')));
             },
             icon: AnimatedSwitcher(
-              child: Icon(isFavorite ? Icons.star : Icons.star_border),
+              child: Icon(isFavorite ? Icons.star : Icons.star_border, key: ValueKey(isFavorite)),
               duration: const Duration(milliseconds: 300),
               transitionBuilder: (child, animation) {
                 return RotationTransition(turns: animation, child: child);
